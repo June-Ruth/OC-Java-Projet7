@@ -20,7 +20,7 @@ class TradeTests {
 	@Autowired
 	private TradeRepository tradeRepository;
 
-	@Test
+	/*@Test
 	void tradeTest() {
 		Trade trade = new Trade("Trade Account", "Type");
 
@@ -43,5 +43,5 @@ class TradeTests {
 		tradeRepository.delete(trade);
 		Optional<Trade> tradeList = tradeRepository.findById(id);
 		assertFalse(tradeList.isPresent());
-}
+	}*/
 }

@@ -10,10 +10,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 class PasswordEncodeTest {
 
-    @Test
+    /*@Test
     void testPassword() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String pw = encoder.encode("123456");
         System.out.println("[ "+ pw + " ]");
-    }
+    }*/
 }
