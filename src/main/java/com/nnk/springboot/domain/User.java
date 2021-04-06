@@ -41,6 +41,7 @@ public class User {
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String role;
 
+
     public Integer getId() {
         return id;
     }

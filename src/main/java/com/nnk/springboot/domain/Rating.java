@@ -12,7 +12,6 @@ import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 @Entity
 @Table(name = "rating")
 public class Rating {
-    // TODO: Map columns in data table RATING with corresponding java fields
     /**
      * Id.
      */
