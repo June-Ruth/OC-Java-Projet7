@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS demo.user
 (
     id       TINYINT(4) NOT NULL AUTO_INCREMENT,
     username VARCHAR(125),
+    ## TODO : password à passer à 60 lors de la mise en place de BCrypt (idem pour test)
     password VARCHAR(125),
     fullname VARCHAR(125),
     role     VARCHAR(125),
