@@ -2,21 +2,45 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
+import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
+    /**
+     * Id.
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    /**
+     * Username.
+     */
     @NotBlank(message = "Username is mandatory")
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String username;
+    /**
+     * Password.
+     */
     @NotBlank(message = "Password is mandatory")
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String password;
+    /**
+     * Full name.
+     */
     @NotBlank(message = "FullName is mandatory")
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String fullname;
+    /**
+     * Role.
+     */
     @NotBlank(message = "Role is mandatory")
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String role;
+
 
     public Integer getId() {
         return id;

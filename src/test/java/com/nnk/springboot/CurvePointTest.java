@@ -20,7 +20,7 @@ class CurvePointTest {
 	@Autowired
 	private CurvePointRepository curvePointRepository;
 
-	@Test
+	/*@Test
 	void curvePointTest() {
 		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
 
@@ -43,6 +43,6 @@ class CurvePointTest {
 		curvePointRepository.delete(curvePoint);
 		Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
 		assertFalse(curvePointList.isPresent());
-	}
+	}*/
 
 }
