@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS demo.rating
     PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS demo.rule
+CREATE TABLE IF NOT EXISTS demo.rule_name
 (
     id          TINYINT(4) NOT NULL AUTO_INCREMENT,
     name        VARCHAR(125),
@@ -71,7 +71,6 @@ CREATE TABLE IF NOT EXISTS demo.trade
     sell_price     DOUBLE,
     benchmark      VARCHAR(125),
     trade_date     TIMESTAMP,
-    commentary     VARCHAR(125),
     security       VARCHAR(125),
     status         VARCHAR(10),
     trader         VARCHAR(125),

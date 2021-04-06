@@ -30,12 +30,14 @@ public class BidList {
      * Account.
      */
     @Column(name = "account")
+    @NotBlank(message = "account is mandatory")
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String account;
     /**
      * Type.
      */
     @Column(name = "type")
+    @NotBlank(message = "type is mandatory")
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String type;
     /**
