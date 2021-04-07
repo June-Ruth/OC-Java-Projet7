@@ -98,6 +98,9 @@ CREATE TABLE IF NOT EXISTS demo.user
 ) ENGINE = InnoDB;
 
 INSERT INTO demo.user(username, password, fullname, role)
-VALUES ("admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "Administrator", "ADMIN");
+VALUES ('admin', '$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa', 'Administrator', 'ADMIN');
 INSERT INTO demo.user(username, password, fullname, role)
-VALUES ("user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "User", "USER");
+VALUES ('user', '$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa', 'User', 'USER');
+
+INSERT INTO demo.bid_list(bid_list_id, account, type, bid_quantity, ask_quantity, bid, ask, benchmark, bid_list_date, commentary, security, status, trader, book, creation_name, creation_date, revision_name, revision_date, deal_name, deal_type, source_list_id, side)
+VALUES (1, 'account', 'type', 10.10, 10, 10, 10, 'benchmark', '2021-01-01', 'commentary', 'security', 'status', 'trader', 'book', 'creation name', '2021-01-01', 'revision name', '2021-01-07', 'deal name', 'deal type', 'source_list_id', 'side')

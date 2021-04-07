@@ -128,7 +128,7 @@ public class Trade {
      * Source list id.
      */
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
-    @Column(name = "source_list°id")
+    @Column(name = "source_list_id")
     private String sourceListId;
     /**
      * Side.

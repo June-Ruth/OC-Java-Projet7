@@ -1,6 +1,10 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.services.BidListService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,16 +14,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER =
+            LogManager.getLogger(BidListController.class);
+    /**
+     * @see BidListService
+     */
+    private BidListService bidListService;
+
+    /**
+     * Autowired constructor.
+     * @param pBidListService .
+     */
+    public BidListController(final BidListService pBidListService) {
+        bidListService = pBidListService;
+    }
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
-        // TODO: call service find all bids to show to the view
+    public String home(Model model) {
+        model.addAttribute("bidListList", bidListService.findAllBidList());
         return "bidList/list";
     }
 
