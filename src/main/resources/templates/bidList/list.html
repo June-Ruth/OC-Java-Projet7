@@ -29,11 +29,11 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th th:text="#{bidList.id}">Id</th>
-					<th th:text="#{bidList.account}">Account</th>
-					<th th:text="#{bidList.type}">Type</th>
-					<th th:text="#{bidList.bidQuantity}">Bid Quantity</th>
-					<th th:text="#{bidList.action}">Action</th>
+					<th>Id</th>
+					<th>Account</th>
+					<th>Type</th>
+					<th>Bid Quantity</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,7 +42,7 @@
 					<td th:text="${bidList.account}"></td>
 					<td th:text="${bidList.type}"></td>
 					<td th:text="${bidList.bidQuantity}"></td>
-					<td class="text-justify">
+					<td>
 						<a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Edit</a>
 						<a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}">Delete</a>
 					</td>

@@ -1,13 +1,14 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
-import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
-import static com.nnk.springboot.constants.Number.THIRTY;
+import static com.nnk.springboot.constants.ErrorMessage.*;
+import static com.nnk.springboot.constants.Number.*;
+import static com.nnk.springboot.constants.Number.TWO;
 
 
 @Entity
@@ -24,35 +25,39 @@ public class Trade {
      * Account.
      */
     @Column(name = "account")
-    @NotBlank(message = "account is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String account;
     /**
      * Type.
      */
     @Column(name = "type")
-    @NotBlank(message = "type is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String type;
     /**
      * Buy quantity.
      */
     @Column(name = "buy_quantity")
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double buyQuantity;
     /**
      * Sell quantity.
      */
     @Column(name = "sell_quantity")
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double sellQuantity;
     /**
      * Buy price.
      */
     @Column(name = "buy_price")
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double buyPrice;
     /**
      * Sell price.
      */
     @Column(name = "sell_price")
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double sellPrice;
     /**
      * Benchmark.

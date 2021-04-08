@@ -47,7 +47,7 @@ class BidListControllerTest {
         bidList1 = new BidList("Account 1", "Type 1", 11.00d);
         bidList2 = new BidList("Account 2", "Type 2", 22.00d);
         bidList3 = new BidList("Account 3", "Type 3", 33.00d);
-        bidList4 = new BidList("Account 4", "Type 4", 44.00d);
+        bidList4 = new BidList("Account 4", "Type 4", 44.50d);
         bidList5 = new BidList("Account 5", "Type 5", 55.00d);
         bidList6 = new BidList(null, null, 0d);
         bidListList.add(bidList1);
@@ -107,7 +107,6 @@ class BidListControllerTest {
     @WithMockUser
     void validateAuthenticatedValidDataTest() throws Exception {
         when(bidListService.saveBidList(any(BidList.class))).thenReturn(bidList4);
-        when(bidListService.findAllBidList()).thenReturn(bidListList);
         mockMvc.perform(post("/bidList/validate")
                 .contentType("text/html;charset=UTF-8")
                 .sessionAttr("bidList", bidList4)
@@ -170,7 +169,7 @@ class BidListControllerTest {
     @Test
     @WithMockUser
     void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : gérer avec la gestion des exceptions
-        when(bidListService.findBidListById(anyInt())).thenThrow(RuntimeException.class);
+        when(bidListService.findBidListById(anyInt())).thenThrow(IllegalArgumentException.class);
         mockMvc.perform(get("/bidList/update/{id}", 1))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
@@ -191,37 +190,43 @@ class BidListControllerTest {
 
     // UPDATE BID TEST //
 
-    @Disabled
     @Test
     @WithMockUser
     void updateBidAuthenticatedValidDataTest() throws Exception {
-        //TODO : when / return
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        when(bidListService.findBidListById(anyInt())).thenReturn(bidList1);
+        when(bidListService.saveBidList(any(BidList.class))).thenReturn(bidList1);
+        mockMvc.perform(post("/bidList/update/{id}", 1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1")
+                .param("account", bidList1.getAccount())
+                .param("type", bidList1.getType())
+                .param("bidQuantity", bidList1.getBidQuantity().toString()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("updateBid"))
-                .andExpect(request().attribute("bidList", bidList5)) //TODO : voir ce qu'on met dedans
-                .andExpect(redirectedUrl("/bidList/List"));
+                .andExpect(redirectedUrl("/bidList/list"))
+                .andExpect(view().name("redirect:/bidList/list"));
     }
 
-    @Disabled
     @Test
     @WithMockUser
     void updateBidAuthenticatedInvalidDataTest() throws Exception {
-        //TODO : when / return
-        mockMvc.perform(get("/bidList/update/{id}", 1))
-                .andExpect(status().is3xxRedirection())
+        mockMvc.perform(post("/bidList/update/{id}", 1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1")
+                .param("account", "")
+                .param("type", "")
+                .param("bidQuantity", ""))
+                .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("updateBid"))
-                .andExpect(request().attribute("bidList", bidList5)) //TODO : voir ce qu'on met dedans
-                .andExpect(redirectedUrl("/bidList/List"));
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("bidList/update"));
     }
 
-    @Disabled
     @Test
     @WithAnonymousUser
     void updateBidUnauthenticatedValidDataTest() throws Exception {
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        mockMvc.perform(post("/bidList/update/{id}", 1))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
@@ -246,7 +251,7 @@ class BidListControllerTest {
     @Test
     @WithMockUser
     void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : refaire avec la gestion des erreurs
-        when(bidListService.findBidListById(anyInt())).thenThrow(RuntimeException.class); //TODO : reprendre quand aura custom l'exception
+        when(bidListService.findBidListById(anyInt())).thenThrow(IllegalArgumentException.class); //TODO : reprendre quand aura custom l'exception
         mockMvc.perform(get("/bidList/delete/{id}", 1))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))

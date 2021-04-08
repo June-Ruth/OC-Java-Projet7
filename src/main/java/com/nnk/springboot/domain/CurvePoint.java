@@ -1,13 +1,17 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
+import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
+import static com.nnk.springboot.constants.ErrorMessage.INVALID_NUMBER;
 import static com.nnk.springboot.constants.Number.SIX;
 import static com.nnk.springboot.constants.Number.TWO;
 
@@ -36,14 +40,14 @@ public class CurvePoint {
      * Term.
      */
     @Column(name = "term")
-    @Digits(integer = SIX , fraction = TWO)
+    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
     private Double term;
     /**
      * Value.
      */
     @Column(name = "value")
-    @Digits(integer = SIX , fraction = TWO)
-    @NotNull
+    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @NotNull(message = FIELD_IS_MANDATORY)
     private Double value;
     /**
      * Creation date.

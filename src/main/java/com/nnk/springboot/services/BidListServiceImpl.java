@@ -32,7 +32,8 @@ public class BidListServiceImpl implements BidListService {
     @Override
     public BidList findBidListById(Integer id) {
         //TODO : NB : personnaliser l'exception
-        return bidListRepository.findById(id).orElseThrow(()-> new RuntimeException("message"));
+        return bidListRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid user Id :" + id));
     }
 
     @Override
@@ -51,7 +52,8 @@ public class BidListServiceImpl implements BidListService {
     @Transactional
     @Override
     public BidList updateBidList(BidList bidList) {
-        //TODO
+        //TODO : récupérer la bid à update, set les éléments changer et save
+
         return bidListRepository.save(bidList);
     }
 

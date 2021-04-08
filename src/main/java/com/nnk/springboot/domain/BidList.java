@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
+import static com.nnk.springboot.constants.ErrorMessage.*;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 import static com.nnk.springboot.constants.Number.SIX;
 import static com.nnk.springboot.constants.Number.THIRTY;
@@ -52,39 +52,39 @@ public class BidList {
      * Account.
      */
     @Column(name = "account")
-    @NotBlank(message = "Account is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String account;
     /**
      * Type.
      */
     @Column(name = "type")
-    @NotBlank(message = "Type is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = THIRTY, message = TOO_MUCH_CHARACTERS)
     private String type;
     /**
      * Bid quantity.
      */
     @Column(name = "bid_quantity")
-    @Digits(integer = SIX, fraction = TWO)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double bidQuantity;
     /**
      * Ask quantity.
      */
     @Column(name = "ask_quantity")
-    @Digits(integer = SIX, fraction = TWO)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double askQuantity;
     /**
      * Bid.
      */
     @Column(name = "bid")
-    @Digits(integer = SIX, fraction = TWO)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double bid;
     /**
      * Ask.
      */
     @Column(name = "ask")
-    @Digits(integer = SIX, fraction = TWO)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double ask;
     /**
      * Benchmark.

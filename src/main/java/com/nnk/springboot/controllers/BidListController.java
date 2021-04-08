@@ -41,15 +41,14 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(BidList bidList) {
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid @ModelAttribute("bidList") BidList bidList, BindingResult result, Model model) {
+    public String validate(@Valid BidList bidList, BindingResult result, Model model) {
         if(!result.hasErrors()) {
             bidListService.saveBidList(bidList);
-            model.addAttribute("bidListList",bidListService.findAllBidList());
             return "redirect:/bidList/list";
         }
         return "bidList/add";
@@ -64,15 +63,22 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-        return "redirect:/bidList/list";
+        if(!result.hasErrors()) {
+            BidList bidList1 = bidListService.findBidListById(id);
+            bidList1.setAccount(bidList.getAccount());
+            bidList1.setType(bidList.getType());
+            bidList1.setBidQuantity(bidList.getBidQuantity());
+            bidListService.saveBidList(bidList1);
+            return "redirect:/bidList/list";
+        }
+        bidList.setBidListId(id);
+        return "bidList/update";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         BidList bidList = bidListService.findBidListById(id);
         bidListService.deleteBidList(bidList);
-        model.addAttribute("bidListList",bidListService.findAllBidList());
         return "redirect:/bidList/list";
     }
 }
