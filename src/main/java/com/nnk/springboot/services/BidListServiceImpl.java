@@ -30,6 +30,12 @@ public class BidListServiceImpl implements BidListService {
     }
 
     @Override
+    public BidList findBidListById(Integer id) {
+        //TODO : NB : personnaliser l'exception
+        return bidListRepository.findById(id).orElseThrow(()-> new RuntimeException("message"));
+    }
+
+    @Override
     public List<BidList> findAllBidList() {
         //TODO
         return bidListRepository.findAll();
@@ -40,5 +46,19 @@ public class BidListServiceImpl implements BidListService {
     public BidList saveBidList(BidList bidList) {
         //TODO
         return bidListRepository.save(bidList);
+    }
+
+    @Transactional
+    @Override
+    public BidList updateBidList(BidList bidList) {
+        //TODO
+        return bidListRepository.save(bidList);
+    }
+
+    @Transactional
+    @Override
+    public void deleteBidList(BidList bidList) {
+        //TODO
+        bidListRepository.delete(bidList);
     }
 }

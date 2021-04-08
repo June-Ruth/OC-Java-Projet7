@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -113,10 +115,7 @@ class BidListControllerTest {
                 .param("type", bidList4.getType())
                 .param("bidQuantity", bidList4.getBidQuantity().toString()))
                 .andExpect(status().is3xxRedirection())
-                //.andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("validate"))
-                //.andExpect(request().attribute("bidListList", bidListList))
-                .andExpect(model().hasNoErrors())
                 .andExpect(redirectedUrl("/bidList/list"))
                 .andExpect(view().name("redirect:/bidList/list"));
     }
@@ -227,25 +226,26 @@ class BidListControllerTest {
 
     // DELETE BID //
 
-    @Disabled
     @Test
     @WithMockUser
     void deleteBidAuthenticatedBidListIdExistsTest() throws Exception {
-        //TODO : when / return
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        when(bidListService.findBidListById(anyInt())).thenReturn(bidList1);
+        doNothing().when(bidListService).deleteBidList(any(BidList.class));
+        mockMvc.perform(get("/bidList/delete/{id}", 1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("deleteBid"))
-                .andExpect(request().attribute("bidListList", bidListList)) //TODO : voir ce qu'on met dedans
-                .andExpect(redirectedUrl("/bidList/List"));
+                .andExpect(redirectedUrl("/bidList/list"))
+                .andExpect(view().name("redirect:/bidList/list"));
     }
 
     @Disabled
     @Test
     @WithMockUser
-    void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception {
-        //TODO : when / return
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+    void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : refaire avec la gestion des erreurs
+        when(bidListService.findBidListById(anyInt())).thenThrow(RuntimeException.class); //TODO : reprendre quand aura custom l'exception
+        mockMvc.perform(get("/bidList/delete/{id}", 1))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("deleteBid"))
@@ -253,11 +253,12 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("/bidList/List")); //TODO : voir quelle vue
     }
 
-    @Disabled
     @Test
     @WithAnonymousUser
     void deleteBidUnauthenticatedBidListIdExistsTest() throws Exception {
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        mockMvc.perform(get("/bidList/delete/{id}",1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
