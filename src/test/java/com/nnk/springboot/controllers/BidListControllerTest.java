@@ -152,24 +152,25 @@ class BidListControllerTest {
 
     // SHOW UPDATE FORM TEST //
 
-    @Disabled
     @Test
     @WithMockUser
     void showUpdateFormAuthenticatedBidListIdExistsTest() throws Exception {
-        //TODO : when / return
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        when(bidListService.findBidListById(anyInt())).thenReturn(bidList1);
+        mockMvc.perform(get("/bidList/update/{id}", 1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("showUpdateForm"))
-                .andExpect(request().attribute("bidList", bidList5)) //TODO : voir ce qu'on met dedans
+                .andExpect(request().attribute("bidList", bidList1))
                 .andExpect(view().name("bidList/update"));
     }
 
     @Disabled
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception {
-        //TODO : when / return
+    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : gérer avec la gestion des exceptions
+        when(bidListService.findBidListById(anyInt())).thenThrow(RuntimeException.class);
         mockMvc.perform(get("/bidList/update/{id}", 1))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
@@ -178,11 +179,12 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/update")); //TODO : voir quelle vue
     }
 
-    @Disabled
     @Test
     @WithAnonymousUser
     void showUpdateFormUnauthenticatedTest() throws Exception {
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+        mockMvc.perform(get("/bidList/update/{id}", 1)
+                .sessionAttr("bidList", bidList1)
+                .param("bidListId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
