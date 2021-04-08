@@ -5,6 +5,7 @@ import com.nnk.springboot.repositories.BidListRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,12 @@ public class BidListServiceImpl implements BidListService {
     public List<BidList> findAllBidList() {
         //TODO
         return bidListRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public BidList saveBidList(BidList bidList) {
+        //TODO
+        return bidListRepository.save(bidList);
     }
 }

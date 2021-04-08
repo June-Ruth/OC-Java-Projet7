@@ -1,9 +1,9 @@
 package com.nnk.springboot.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.BidListService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -64,7 +65,8 @@ class BidListControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("home"))
-                .andExpect(request().attribute("bidListList", bidListList))
+                .andExpect(model().attribute("bidListList", bidListList))
+                .andExpect(model().hasNoErrors())
                 .andExpect(view().name("bidList/list"));
     }
 
@@ -73,10 +75,7 @@ class BidListControllerTest {
     void homeUnauthenticatedTest() throws Exception {
         mockMvc.perform(get("/bidList/list"))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("home"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
 
@@ -85,7 +84,6 @@ class BidListControllerTest {
     @Test
     @WithMockUser
     void addBidFormAuthenticatedTest() throws Exception {
-        //TODO : when / return
         mockMvc.perform(get("/bidList/add"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
@@ -98,10 +96,7 @@ class BidListControllerTest {
     void addBidFormUnauthenticatedTest() throws Exception {
         mockMvc.perform(get("/bidList/add"))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("addBidForm"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     // VALIDATE TEST //
@@ -109,45 +104,56 @@ class BidListControllerTest {
     @Test
     @WithMockUser
     void validateAuthenticatedValidDataTest() throws Exception {
-        //TODO : when / return
+        when(bidListService.saveBidList(any(BidList.class))).thenReturn(bidList4);
+        when(bidListService.findAllBidList()).thenReturn(bidListList);
         mockMvc.perform(post("/bidList/validate")
-                .content(new ObjectMapper().writeValueAsString(bidList5))
-                .contentType("text/html;charset=UTF-8"))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .contentType("text/html;charset=UTF-8")
+                .sessionAttr("bidList", bidList4)
+                .param("account", bidList4.getAccount())
+                .param("type", bidList4.getType())
+                .param("bidQuantity", bidList4.getBidQuantity().toString()))
+                .andExpect(status().is3xxRedirection())
+                //.andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("validate"))
-                .andExpect(request().attribute("bidList", bidList5)) //TODO : vérifier le nom donné à l'attribut
-                .andExpect(view().name("bidList/add"));
+                //.andExpect(request().attribute("bidListList", bidListList))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/bidList/list"))
+                .andExpect(view().name("redirect:/bidList/list"));
     }
 
     @Test
     @WithMockUser
     void validateAuthenticatedInvalidDataTest() throws Exception {
-        //TODO : when / return
         mockMvc.perform(post("/bidList/validate")
-                .content(new ObjectMapper().writeValueAsString(bidList6))
-                .contentType("text/html;charset=UTF-8"))
-                .andExpect(status().isBadRequest())
+                //.content(new ObjectMapper().writeValueAsString(bidList6))
+                .contentType("text/html;charset=UTF-8")
+                .sessionAttr("bidList", bidList6)
+                .param("account", bidList6.getAccount())
+                .param("type", bidList6.getType())
+                .param("bidQuantity", bidList6.getBidQuantity().toString()))
+                .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("validate"))
-                .andExpect(view().name("bidList/add")); //TODO : voir si pas vue de prévu pour badrequest ?
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("bidList/add"));
     }
 
     @Test
     @WithAnonymousUser
     void validateUnauthenticatedValidDataTest() throws Exception {
         mockMvc.perform(get("/bidList/validate")
-                .content(new ObjectMapper().writeValueAsString(bidList5))
-                .contentType("text/html;charset=UTF-8"))
+                .contentType("text/html;charset=UTF-8")
+                .sessionAttr("bidList", bidList4)
+                .param("account", bidList4.getAccount())
+                .param("type", bidList4.getType())
+                .param("bidQuantity", bidList4.getBidQuantity().toString()))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("validate"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     // SHOW UPDATE FORM TEST //
 
+    @Disabled
     @Test
     @WithMockUser
     void showUpdateFormAuthenticatedBidListIdExistsTest() throws Exception {
@@ -160,6 +166,7 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/update"));
     }
 
+    @Disabled
     @Test
     @WithMockUser
     void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception {
@@ -172,19 +179,18 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/update")); //TODO : voir quelle vue
     }
 
+    @Disabled
     @Test
     @WithAnonymousUser
     void showUpdateFormUnauthenticatedTest() throws Exception {
         mockMvc.perform(get("/bidList/update/{id}", 1))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("showUpdateForm"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     // UPDATE BID TEST //
 
+    @Disabled
     @Test
     @WithMockUser
     void updateBidAuthenticatedValidDataTest() throws Exception {
@@ -197,6 +203,7 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("/bidList/List"));
     }
 
+    @Disabled
     @Test
     @WithMockUser
     void updateBidAuthenticatedInvalidDataTest() throws Exception {
@@ -209,19 +216,18 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("/bidList/List"));
     }
 
+    @Disabled
     @Test
     @WithAnonymousUser
     void updateBidUnauthenticatedValidDataTest() throws Exception {
         mockMvc.perform(get("/bidList/update/{id}", 1))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("updateBid"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     // DELETE BID //
 
+    @Disabled
     @Test
     @WithMockUser
     void deleteBidAuthenticatedBidListIdExistsTest() throws Exception {
@@ -234,6 +240,7 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("/bidList/List"));
     }
 
+    @Disabled
     @Test
     @WithMockUser
     void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception {
@@ -246,15 +253,13 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("/bidList/List")); //TODO : voir quelle vue
     }
 
+    @Disabled
     @Test
     @WithAnonymousUser
     void deleteBidUnauthenticatedBidListIdExistsTest() throws Exception {
         mockMvc.perform(get("/bidList/update/{id}", 1))
                 .andExpect(status().is3xxRedirection())
-//TODO : pour le moment, pas de redirection, voir avec la mise en place de spring sécu
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("deleteBid"))
-                .andExpect(redirectedUrl("/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
 }

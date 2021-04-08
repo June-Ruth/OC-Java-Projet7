@@ -18,7 +18,29 @@
 			<!--
 			TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
 			 -->
+            <div class="form-group">
+                <label for="account" th:text="#{bidList.account}">Account</label>
+                <div>
+                    <input type="text" th:field="*{account}" id="account" placeholder="Account" th:class="${#fields.hasErrors('account')} ? fieldError"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type" th:text="#{bidList.type}">Type</label>
+                <div>
+                    <input type="text" th:field="*{type}" id="type" placeholder="Type" th:class="${#fields.hasErrors('type')} ? fieldError"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bidQuantity" th:text="#{bidList.bidQuantity}">Bid Quantity</label>
+                <div>
+                    <input type="number" th:field="*{bidQuantity}" id="bidQuantity" placeholder="BidQuantity" th:class="${#fields.hasErrors('bidQuantity')} ? fieldError"/>
+                </div>
+            </div>
 		</form>
+        <div>
+            <a href="/bidList/list" class="btn btn-primary btn-danger" th:text="#{ui.cancel}">Cancel</a>
+            <button class="btn btn-primary btn-sm" type="submit" th:value="#{ui.addBid}">Add New Bid</button>
+        </div>
 	</div>
 
 </div>
