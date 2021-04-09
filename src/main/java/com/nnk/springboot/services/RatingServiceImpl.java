@@ -60,7 +60,7 @@ public class RatingServiceImpl implements RatingService {
     /**
      * @see RatingService .
      * @param rating to save.
-     * @return curve point.
+     * @return rating.
      */
     @Transactional
     @Override

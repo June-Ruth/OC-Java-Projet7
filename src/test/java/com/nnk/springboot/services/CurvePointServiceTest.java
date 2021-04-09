@@ -45,14 +45,14 @@ class CurvePointServiceTest {
     // FIND CURVE POINT BY ID TEST //
 
     @Test
-    void findBidListByIdExistsTest() {
+    void findCurvePointByIdExistsTest() {
         when(curvePointRepository.findById(anyInt())).thenReturn(Optional.of(curvePoint1));
         curvePointService.findCurvePointById(1);
         verify(curvePointRepository, times(1)).findById(1);
     }
 
     @Test
-    void findBidListByIdNotExistsTest() {
+    void findCurvePointByIdNotExistsTest() {
         when(curvePointRepository.findById(anyInt())).thenReturn(Optional.empty());
         assertThrows(ElementNotFoundException.class, () -> curvePointService.findCurvePointById(1));
     }
@@ -60,7 +60,7 @@ class CurvePointServiceTest {
     // FIND ALL CURVE POINT TEST //
 
     @Test
-    void findAllBidListTest() {
+    void findAllCurvePointTest() {
         when(curvePointRepository.findAll()).thenReturn(curvePointList);
         curvePointService.findAllCurvePoint();
         verify(curvePointRepository, times(1)).findAll();
@@ -69,16 +69,16 @@ class CurvePointServiceTest {
     // SAVE CURVE POINT TEST //
 
     @Test
-    void saveBidListTest() {
+    void saveCurvePointTest() {
         when(curvePointRepository.save(any(CurvePoint.class))).thenReturn(curvePoint1);
         curvePointService.saveCurvePoint(curvePoint1);
         verify(curvePointRepository, times(1)).save(curvePoint1);
     }
 
-    // DELETE BID LIST TEST //
+    // DELETE CURVE POINT TEST //
 
     @Test
-    void deleteBidListTest() {
+    void deleteCurvePointTest() {
         doNothing().when(curvePointRepository).delete(any(CurvePoint.class));
         curvePointService.deleteCurvePoint(curvePoint1);
         verify(curvePointRepository, times(1)).delete(curvePoint1);
