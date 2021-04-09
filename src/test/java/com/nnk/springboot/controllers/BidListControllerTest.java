@@ -54,7 +54,6 @@ class BidListControllerTest {
         bidListList.add(bidList2);
         bidListList.add(bidList3);
         bidListList.add(bidList4);
-
     }
 
     // HOME TEST //

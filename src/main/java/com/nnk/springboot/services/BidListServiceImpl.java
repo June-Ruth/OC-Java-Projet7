@@ -29,38 +29,57 @@ public class BidListServiceImpl implements BidListService {
         bidListRepository = pBidListRepository;
     }
 
+    /**
+     * @see BidListService .
+     * @param id .
+     * @return bid list
+     */
     @Override
-    public BidList findBidListById(Integer id) {
-        //TODO : NB : personnaliser l'exception
-        return bidListRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Invalid user Id :" + id));
+    public BidList findBidListById(final Integer id) {
+        //TODO : voir gestion de l'exception
+        LOGGER.info("Try to find bid list with id : " + id);
+        BidList result = bidListRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Invalid user id : " + id));
+        LOGGER.info("Get bid list with id : " + id + "\n result : " + result);
+        return result;
     }
 
+    /**
+     * @see BidListService .
+     * @return list of bid list.
+     */
     @Override
     public List<BidList> findAllBidList() {
-        //TODO
-        return bidListRepository.findAll();
+        LOGGER.info("Try to get all bid list");
+        List<BidList> result = bidListRepository.findAll();
+        LOGGER.info("Get all bid list :" + result);
+        return result;
     }
 
+    /**
+     * @see BidListService .
+     * @param bidList to save.
+     * @return bid list.
+     */
     @Transactional
     @Override
-    public BidList saveBidList(BidList bidList) {
-        //TODO
-        return bidListRepository.save(bidList);
+    public BidList saveBidList(final BidList bidList) {
+        LOGGER.info("Try to save bid list : " + bidList);
+        BidList result = bidListRepository.save(bidList);
+        LOGGER.info("Save bid list : " + result);
+        return result;
     }
 
+    /**
+     * @see BidListService .
+     * @param bidList to delete.
+     */
     @Transactional
     @Override
-    public BidList updateBidList(BidList bidList) {
-        //TODO : récupérer la bid à update, set les éléments changer et save
-
-        return bidListRepository.save(bidList);
-    }
-
-    @Transactional
-    @Override
-    public void deleteBidList(BidList bidList) {
-        //TODO
+    public void deleteBidList(final BidList bidList) {
+        LOGGER.info("Try to delete bid list : " + bidList);
         bidListRepository.delete(bidList);
+        LOGGER.info("Delete bid list");
     }
 }
