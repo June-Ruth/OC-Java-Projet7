@@ -5,10 +5,12 @@ import com.nnk.springboot.exceptions.ElementNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class RuleNameServiceImpl implements RuleNameService {
     /**
      * @see Logger

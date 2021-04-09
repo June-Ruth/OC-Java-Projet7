@@ -74,7 +74,7 @@ public class RatingController {
         LOGGER.info("Try to save new rating : " + rating);
         if (!result.hasErrors()) {
             Rating rating1 = ratingService.saveRating(rating);
-            LOGGER.info("Save curve point : " + rating1);
+            LOGGER.info("Save rating : " + rating1);
             return "redirect:/rating/list";
         }
         LOGGER.error("Can't save following rating, "

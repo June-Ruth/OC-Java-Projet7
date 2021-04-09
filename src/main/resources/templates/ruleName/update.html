@@ -15,10 +15,52 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/ruleName/update/{id}(id=${ruleName.id})}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of RuleName, there are 2 buttons: Update data and Cancel to the RuleName
-			 -->
-
+			<div>
+				<label for="name">Name</label>
+				<div>
+					<input type="text" th:field="*{name}" id="name" placeholder="Name">
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="description">Description</label>
+				<div>
+					<input type="text" th:field="*{description}" id="description" placeholder="Description"/>
+					<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="json">Json</label>
+				<div>
+					<input type="text" th:field="*{json}" id="json" placeholder="Json"/>
+					<span th:if="${#fields.hasErrors('json')}" th:errors="*{json}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="template">Template</label>
+				<div>
+					<input type="text" th:field="*{template}" id="template" placeholder="Template"/>
+					<span th:if="${#fields.hasErrors('template')}" th:errors="*{template}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="sqlStr">sqlStr</label>
+				<div>
+					<input type="text" th:field="*{sqlStr}" id="sqlStr" placeholder="sqlStr"/>
+					<span th:if="${#fields.hasErrors('sqlStr')}" th:errors="*{sqlStr}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="sqlPart">sqlPart</label>
+				<div>
+					<input type="text" th:field="*{sqlPart}" id="sqlPart" placeholder="sqlPart"/>
+					<span th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}"></span>
+				</div>
+			</div>
+			<div>
+				<a href="/ruleName/list">Cancel</a>
+				<input type="submit" value="Update">
+			</div>
 		</form>
 	</div>
 
