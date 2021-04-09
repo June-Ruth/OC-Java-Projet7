@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
 import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 
@@ -19,25 +20,25 @@ public class User {
     /**
      * Username.
      */
-    @NotBlank(message = "Username is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String username;
     /**
      * Password.
      */
-    @NotBlank(message = "Password is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String password;
     /**
      * Full name.
      */
-    @NotBlank(message = "FullName is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String fullname;
     /**
      * Role.
      */
-    @NotBlank(message = "Role is mandatory")
+    @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String role;
 

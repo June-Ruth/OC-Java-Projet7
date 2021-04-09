@@ -5,6 +5,14 @@ package com.nnk.springboot.constants;
  */
 public final class Number {
     /**
+     * Number 2.
+     */
+    public static final int TWO = 2;
+    /**
+     * Number 6.
+     */
+    public static final int SIX = 6;
+    /**
      * Number 10.
      */
     public static final int TEN = 10;
