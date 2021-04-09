@@ -191,7 +191,7 @@ class RatingControllerTest {
     void updateRatingAuthenticatedValidDataTest() throws Exception {
         when(ratingService.findRatingById(anyInt())).thenReturn(rating1);
         when(ratingService.saveRating(any(Rating.class))).thenReturn(rating4);
-        mockMvc.perform(post("/curvePoint/update/{id}", 4)
+        mockMvc.perform(post("/rating/update/{id}", 4)
                 .sessionAttr("rating", rating4)
                 .param("moodysRating", rating4.getMoodysRating())
                 .param("sandPRating", rating4.getSandPRating())

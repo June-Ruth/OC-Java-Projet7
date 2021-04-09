@@ -54,7 +54,7 @@ public class RatingController {
      * @param rating .
      * @return the form.
      */
-    @GetMapping("/curvePoint/add")
+    @GetMapping("/rating/add")
     public String addRatingForm(final Rating rating) {
         LOGGER.info("Show form to add rating");
         return "rating/add";
@@ -116,6 +116,7 @@ public class RatingController {
             rating1.setSandPRating(rating.getSandPRating());
             rating1.setFitchRating(rating.getFitchRating());
             rating1.setOrderNumber(rating.getOrderNumber());
+            ratingService.saveRating(rating1);
             LOGGER.info("Succes to update rating " + rating1);
             return "redirect:/rating/list";
         }
