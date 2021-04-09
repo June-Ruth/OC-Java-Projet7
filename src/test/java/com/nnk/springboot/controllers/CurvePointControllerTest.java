@@ -87,7 +87,7 @@ class CurvePointControllerTest {
         mockMvc.perform(get("/curvePoint/add"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("addCurvePoint"))
+                .andExpect(handler().methodName("addCurvePointForm"))
                 .andExpect(view().name("curvePoint/add"));
     }
 
@@ -205,12 +205,12 @@ class CurvePointControllerTest {
         mockMvc.perform(post("/curvePoint/update/{id}", 1)
                 .sessionAttr("curvePoint", curvePoint1)
                 .param("curvePointId", "1")
-                .param("curveId", curvePoint1.getCurveId().toString())
-                .param("term", curvePoint1.getTerm().toString())
-                .param("value", curvePoint1.getValue().toString()))
+                .param("curveId", "")
+                .param("term", "")
+                .param("value", ""))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("updatecurvePoint"))
+                .andExpect(handler().methodName("updateCurvePoint"))
                 .andExpect(model().hasErrors())
                 .andExpect(view().name("curvePoint/update"));
     }

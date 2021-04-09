@@ -49,6 +49,7 @@ public class CurvePoint {
      * Curve id.
      */
     @Column(name = "curve_id")
+    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
     private Integer curveId;
     /**
      * As of date.
