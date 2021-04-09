@@ -223,7 +223,7 @@ class CurvePointControllerTest {
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
-    // DELETE CURVE POINT //
+    // DELETE CURVE POINT TEST //
 
     @Test
     @WithMockUser

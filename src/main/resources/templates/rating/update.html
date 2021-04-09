@@ -15,9 +15,38 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/update/{id}(id=${rating.id})}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of Rating, there are 2 buttons: Update data and Cancel to the Rating
-			 -->
+			<div>
+				<label for="moodysRating">MoodysRating</label>
+				<div>
+					<input type="text" th:field="*{moodysRating}" id="moodysRating" placeholder="MoodysRating">
+					<span th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="sandPRating">SandPRating</label>
+				<div>
+					<input type="text" th:field="*{sandPRating}" id="sandPRating" placeholder="SandPRating"/>
+					<span th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="fitchRating">FitchRating</label>
+				<div>
+					<input type="text" th:field="*{fitchRating}" id="fitchRating" placeholder="FitchRating"/>
+					<span th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="orderNumber">Order</label>
+				<div>
+					<input type="text" th:field="*{orderNumber}" id="orderNumber" placeholder="OrderNumber"/>
+					<span th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}"></span>
+				</div>
+			</div>
+			<div>
+				<a href="/rating/list">Cancel</a>
+				<input type="submit" value="Update">
+			</div>
 		</form>
 	</div>
 

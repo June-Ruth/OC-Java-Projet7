@@ -37,9 +37,7 @@ public class BidList {
     /**
      * Private empty constructor.
      */
-    private BidList() {
-
-    }
+    private BidList() { }
 
     /**
      * Id.
