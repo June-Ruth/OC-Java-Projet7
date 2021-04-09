@@ -2,21 +2,46 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
+import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
+import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
+    /**
+     * Id.
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @NotBlank(message = "Username is mandatory")
+    /**
+     * Username.
+     */
+    @NotBlank(message = FIELD_IS_MANDATORY)
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String username;
-    @NotBlank(message = "Password is mandatory")
+    /**
+     * Password.
+     */
+    @NotBlank(message = FIELD_IS_MANDATORY)
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String password;
-    @NotBlank(message = "FullName is mandatory")
+    /**
+     * Full name.
+     */
+    @NotBlank(message = FIELD_IS_MANDATORY)
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String fullname;
-    @NotBlank(message = "Role is mandatory")
+    /**
+     * Role.
+     */
+    @NotBlank(message = FIELD_IS_MANDATORY)
+    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String role;
+
 
     public Integer getId() {
         return id;
