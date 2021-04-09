@@ -37,7 +37,6 @@ public class BidListServiceImpl implements BidListService {
      */
     @Override
     public BidList findBidListById(final Integer id) {
-        //TODO : voir gestion de l'exception
         LOGGER.info("Try to find bid list with id : " + id);
         BidList result = bidListRepository.findById(id)
                 .orElseThrow(() -> new ElementNotFoundException(

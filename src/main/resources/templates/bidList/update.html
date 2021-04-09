@@ -25,14 +25,14 @@
 				<label for="type">Type</label>
 				<div>
 					<input type="text" th:field="*{type}" id="type" placeholder="Type"/>
-					<span th:if="${#fields.hasErrors('type')}" th:errors="*{account}"></span>
+					<span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
 				</div>
 			</div>
 			<div>
 				<label for="bidQuantity">Bid Quantity</label>
 				<div>
 					<input type="text" th:field="*{bidQuantity}" id="bidQuantity" placeholder="BidQuantity"/>
-					<span th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{account}"></span>
+					<span th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}"></span>
 				</div>
 			</div>
 			<div>

@@ -121,7 +121,7 @@ public class BidListController {
         }
         bidList.setBidListId(id);
         LOGGER.error("Can't update following bid list, "
-                + "must be invalid date " + bidList);
+                + "must be invalid data " + bidList);
         return "bidList/update";
     }
 

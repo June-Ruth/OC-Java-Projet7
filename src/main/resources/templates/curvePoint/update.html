@@ -14,9 +14,31 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
-			 -->
+			<div>
+				<label for="curveId">Curve Id</label>
+				<div>
+					<input type="text" th:field="*{curveId}" id="curveId" placeholder="CurveId">
+					<span th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="term">Term</label>
+				<div>
+					<input type="text" th:field="*{term}" id="term" placeholder="Term"/>
+					<span th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></span>
+				</div>
+			</div>
+			<div>
+				<label for="value">Value</label>
+				<div>
+					<input type="text" th:field="*{value}" id="value" placeholder="Value"/>
+					<span th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></span>
+				</div>
+			</div>
+			<div>
+				<a href="/curvePoint/list">Cancel</a>
+				<input type="submit" value="Update">
+			</div>
 		</form>
 	</div>
 
