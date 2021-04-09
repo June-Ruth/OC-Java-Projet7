@@ -21,7 +21,8 @@ public class Rating {
      */
     public Rating(final String moodysRating,
                   final String sandPRating,
-                  final String fitchRating, Integer orderNumber) {
+                  final String fitchRating,
+                  final Integer orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;

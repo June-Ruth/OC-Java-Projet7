@@ -79,7 +79,7 @@ public class CurvePointController {
             LOGGER.info("Save curve point : " + curvePoint1);
             return "redirect:/curvePoint/list";
         }
-        LOGGER.error("Can't save following bid list, "
+        LOGGER.error("Can't save following curve point, "
                 + "must be invalid data :" + curvePoint);
         return "curvePoint/add";
     }
@@ -104,14 +104,14 @@ public class CurvePointController {
      * @param curvePoint with updated information.
      * @param result .
      * @param model .
-     * @return list with updated bid list.
+     * @return list with updated curve point.
      */
     @PostMapping("/curvePoint/update/{id}")
     public String updateCurvePoint(@PathVariable("id") final Integer id,
                             @Valid final CurvePoint curvePoint,
                             final BindingResult result,
                             final Model model) {
-        LOGGER.info("Try to update bid list with id " + id);
+        LOGGER.info("Try to update curve point with id " + id);
         if (!result.hasErrors()) {
             CurvePoint curvePoint1 = curvePointService.findCurvePointById(id);
             curvePoint1.setCurveId(curvePoint.getCurveId());
@@ -136,7 +136,7 @@ public class CurvePointController {
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteCurvePoint(@PathVariable("id") final Integer id,
                             final Model model) {
-        LOGGER.info("Try to delete bid list with id : " + id);
+        LOGGER.info("Try to delete curve point with id : " + id);
         CurvePoint curvePoint = curvePointService.findCurvePointById(id);
         curvePointService.deleteCurvePoint(curvePoint);
         return "redirect:/curvePoint/list";

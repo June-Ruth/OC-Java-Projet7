@@ -224,7 +224,7 @@ class BidListControllerTest {
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
-    // DELETE BID //
+    // DELETE BID TEST //
 
     @Test
     @WithMockUser
