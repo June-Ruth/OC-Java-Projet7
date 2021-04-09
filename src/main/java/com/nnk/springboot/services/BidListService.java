@@ -8,8 +8,7 @@ public interface BidListService {
     /**
      * Find a bid list by its id.
      * @param id .
-     * @return bid list found - if not found, throws exception
-     * // TODO : valider quelle exception
+     * @return bid list found - if not found, throws ElementNotFoundException
      * @see BidList
      */
     BidList findBidListById(Integer id);

@@ -37,7 +37,6 @@ class BidListControllerTest {
     private BidList bidList3;
     private BidList bidList4;
     private BidList bidList5;
-    private BidList bidList6;
 
     private List<BidList> bidListList;
 
@@ -48,8 +47,7 @@ class BidListControllerTest {
         bidList2 = new BidList("Account 2", "Type 2", 22.00d);
         bidList3 = new BidList("Account 3", "Type 3", 33.00d);
         bidList4 = new BidList("Account 4", "Type 4", 44.50d);
-        bidList5 = new BidList("Account 5", "Type 5", 55.00d);
-        bidList6 = new BidList(null, null, 0d);
+        bidList5 = new BidList(null, null, 0d);
         bidListList.add(bidList1);
         bidListList.add(bidList2);
         bidListList.add(bidList3);
@@ -122,12 +120,11 @@ class BidListControllerTest {
     @WithMockUser
     void validateAuthenticatedInvalidDataTest() throws Exception {
         mockMvc.perform(post("/bidList/validate")
-                //.content(new ObjectMapper().writeValueAsString(bidList6))
                 .contentType("text/html;charset=UTF-8")
-                .sessionAttr("bidList", bidList6)
-                .param("account", bidList6.getAccount())
-                .param("type", bidList6.getType())
-                .param("bidQuantity", bidList6.getBidQuantity().toString()))
+                .sessionAttr("bidList", bidList5)
+                .param("account", bidList5.getAccount())
+                .param("type", bidList5.getType())
+                .param("bidQuantity", bidList5.getBidQuantity().toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("validate"))
