@@ -34,9 +34,7 @@ public class CurvePoint {
     /**
      * Private empty constructor.
      */
-    public CurvePoint() {
-
-    }
+    private CurvePoint() { }
 
     /**
      * Id.
