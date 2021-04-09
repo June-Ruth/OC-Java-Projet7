@@ -1,6 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.exceptions.ElementNotFoundException;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,7 +51,7 @@ class BidListServiceTest {
     @Test
     void findBidListByIdNotExistsTest() {
         when(bidListRepository.findById(anyInt())).thenReturn(Optional.empty());
-        assertThrows(IllegalArgumentException.class, () -> bidListService.findBidListById(1));
+        assertThrows(ElementNotFoundException.class, () -> bidListService.findBidListById(1));
     }
 
     // FIND ALL BID LIST TEST //

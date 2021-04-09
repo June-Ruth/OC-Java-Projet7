@@ -45,7 +45,7 @@ public class BidListController {
     public String home(final Model model) {
         List<BidList> result = bidListService.findAllBidList();
         model.addAttribute("bidListList", result);
-        LOGGER.info("Find all bid list : " + result);
+        LOGGER.info("Find all bid list, size = " + result.size());
         return "bidList/list";
     }
 

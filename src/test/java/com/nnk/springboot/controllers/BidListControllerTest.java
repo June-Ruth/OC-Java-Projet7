@@ -1,9 +1,9 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.exceptions.ElementNotFoundException;
 import com.nnk.springboot.services.BidListService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -164,17 +164,14 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/update"));
     }
 
-    @Disabled
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : gérer avec la gestion des exceptions
-        when(bidListService.findBidListById(anyInt())).thenThrow(IllegalArgumentException.class);
-        mockMvc.perform(get("/bidList/update/{id}", 1))
+    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception {
+        when(bidListService.findBidListById(anyInt())).thenThrow(ElementNotFoundException.class);
+        mockMvc.perform(get("/bidList/update/{id}", 1)
+                .param("bidListId", "1"))
                 .andExpect(status().isNotFound())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("showUpdateForm"))
-                .andExpect(request().attribute("bidList", bidList5)) //TODO : voir ce qu'on met dedans
-                .andExpect(view().name("bidList/update")); //TODO : voir quelle vue
+                .andExpect(handler().methodName("showUpdateForm"));
     }
 
     @Test
@@ -246,17 +243,14 @@ class BidListControllerTest {
                 .andExpect(view().name("redirect:/bidList/list"));
     }
 
-    @Disabled
     @Test
     @WithMockUser
-    void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception { //TODO : refaire avec la gestion des erreurs
-        when(bidListService.findBidListById(anyInt())).thenThrow(IllegalArgumentException.class); //TODO : reprendre quand aura custom l'exception
-        mockMvc.perform(get("/bidList/delete/{id}", 1))
+    void deleteBidAuthenticatedBidListIdNotExistsTest() throws Exception {
+        when(bidListService.findBidListById(anyInt())).thenThrow(ElementNotFoundException.class);
+        mockMvc.perform(get("/bidList/delete/{id}", 1)
+                .param("bidListId", "1"))
                 .andExpect(status().isNotFound())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(handler().methodName("deleteBid"))
-                .andExpect(request().attribute("bidListList", bidListList)) //TODO : voir ce qu'on met dedans
-                .andExpect(redirectedUrl("/bidList/List")); //TODO : voir quelle vue
+                .andExpect(handler().methodName("deleteBid"));
     }
 
     @Test

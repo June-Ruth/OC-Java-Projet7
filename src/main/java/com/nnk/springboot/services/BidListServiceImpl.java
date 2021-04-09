@@ -1,6 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.exceptions.ElementNotFoundException;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,8 +40,8 @@ public class BidListServiceImpl implements BidListService {
         //TODO : voir gestion de l'exception
         LOGGER.info("Try to find bid list with id : " + id);
         BidList result = bidListRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Invalid user id : " + id));
+                .orElseThrow(() -> new ElementNotFoundException(
+                        "No bid list found for id : " + id));
         LOGGER.info("Get bid list with id : " + id + "\n result : " + result);
         return result;
     }
