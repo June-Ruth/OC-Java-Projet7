@@ -42,43 +42,43 @@ class RatingServiceTest {
         ratingList.add(rating2);
     }
 
-    // FIND CURVE POINT BY ID TEST //
+    // FIND RATING BY ID TEST //
 
     @Test
-    void findBidListByIdExistsTest() {
+    void findRatingByIdExistsTest() {
         when(ratingRepository.findById(anyInt())).thenReturn(Optional.of(rating1));
         ratingService.findRatingById(1);
         verify(ratingRepository, times(1)).findById(1);
     }
 
     @Test
-    void findBidListByIdNotExistsTest() {
+    void findRatingByIdNotExistsTest() {
         when(ratingRepository.findById(anyInt())).thenReturn(Optional.empty());
         assertThrows(ElementNotFoundException.class, () -> ratingService.findRatingById(1));
     }
 
-    // FIND ALL CURVE POINT TEST //
+    // FIND ALL RATING TEST //
 
     @Test
-    void findAllBidListTest() {
+    void findAllRatingTest() {
         when(ratingRepository.findAll()).thenReturn(ratingList);
         ratingService.findAllRating();
         verify(ratingRepository, times(1)).findAll();
     }
 
-    // SAVE CURVE POINT TEST //
+    // SAVE RATING TEST //
 
     @Test
-    void saveBidListTest() {
+    void saveRatingTest() {
         when(ratingRepository.save(any(Rating.class))).thenReturn(rating1);
         ratingService.saveRating(rating1);
         verify(ratingRepository, times(1)).save(rating1);
     }
 
-    // DELETE BID LIST TEST //
+    // DELETE RATING TEST //
 
     @Test
-    void deleteBidListTest() {
+    void deleteRatingTest() {
         doNothing().when(ratingRepository).delete(any(Rating.class));
         ratingService.deleteRating(rating1);
         verify(ratingRepository, times(1)).delete(rating1);

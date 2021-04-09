@@ -227,7 +227,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithMockUser
-    void deleteCurvePointAuthenticatedBidListIdExistsTest() throws Exception {
+    void deleteCurvePointAuthenticatedCurvePointIdExistsTest() throws Exception {
         when(curvePointService.findCurvePointById(anyInt())).thenReturn(curvePoint1);
         doNothing().when(curvePointService).deleteCurvePoint(any(CurvePoint.class));
         mockMvc.perform(get("/curvePoint/delete/{id}", 1)
@@ -241,7 +241,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithMockUser
-    void deleteCurvePointAuthenticatedBidListIdNotExistsTest() throws Exception {
+    void deleteCurvePointAuthenticatedCurvePointIdNotExistsTest() throws Exception {
         when(curvePointService.findCurvePointById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/curvePoint/delete/{id}", 1)
                 .param("curvePointId", "1"))
@@ -251,7 +251,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithAnonymousUser
-    void deleteCurvePointUnauthenticatedBidListIdExistsTest() throws Exception {
+    void deleteCurvePointUnauthenticatedCurvePointIdExistsTest() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/{id}",1)
                 .sessionAttr("curvePoint", curvePoint1)
                 .param("curvePointId", "1"))
