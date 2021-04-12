@@ -15,37 +15,44 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<div>
-				<label for="moodysRating">MoodysRating</label>
-				<div>
-					<input type="text" th:field="*{moodysRating}" id="moodysRating" placeholder="MoodysRating">
-					<span th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></span>
+
+			<div class="form-group">
+				<label for="moodysRating" class="col-sm-2 control-label">MoodysRating</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{moodysRating}" id="moodysRating" placeholder="MoodysRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></p>
 				</div>
 			</div>
-			<div>
-				<label for="sandPRating">SandPRating</label>
-				<div>
-					<input type="text" th:field="*{sandPRating}" id="sandPRating" placeholder="SandPRating"/>
-					<span th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></span>
+
+			<div class="form-group">
+				<label for="sandPRating" class="col-sm-2 control-label">SandPRating</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{sandPRating}" id="sandPRating" placeholder="SandPRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></p>
 				</div>
 			</div>
-			<div>
-				<label for="fitchRating">FitchRating</label>
-				<div>
-					<input type="text" th:field="*{fitchRating}" id="fitchRating" placeholder="FitchRating"/>
-					<span th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></span>
+
+			<div class="form-group">
+				<label for="fitchRating" class="col-sm-2 control-label">FitchRating</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{fitchRating}" id="fitchRating" placeholder="FitchRating" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></p>
 				</div>
 			</div>
-			<div>
-				<label for="orderNumber">Order</label>
-				<div>
-					<input type="text" th:field="*{orderNumber}" id="orderNumber" placeholder="OrderNumber"/>
-					<span th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}"></span>
+
+			<div class="form-group">
+				<label for="orderNumber" class="col-sm-2 control-label">Order</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{orderNumber}" id="orderNumber" placeholder="OrderNumber" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}"></p>
 				</div>
 			</div>
-			<div>
-				<a href="/rating/list">Cancel</a>
-				<input type="submit" value="New Rating">
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					<a class="btn btn-danger btn-sm" href="/rating/list">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="New Rating">
+				</div>
 			</div>
 		</form>
 	</div>
