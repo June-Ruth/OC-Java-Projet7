@@ -189,7 +189,7 @@ class TradeControllerTest {
     void updateTradeAuthenticatedValidDataTest() throws Exception {
         when(tradeService.findTradeById(anyInt())).thenReturn(trade1);
         when(tradeService.saveTrade(any(Trade.class))).thenReturn(trade1);
-        mockMvc.perform(post("/bidList/update/{id}", 1)
+        mockMvc.perform(post("/trade/update/{id}", 1)
                 .sessionAttr("trade", trade1)
                 .param("tradeId", "1")
                 .param("account", trade1.getAccount())
