@@ -44,14 +44,14 @@ class TradeServiceTest {
     // FIND TRADE BY ID TEST //
 
     @Test
-    void findBidListByIdExistsTest() {
+    void findTradeByIdExistsTest() {
         when(tradeRepository.findById(anyInt())).thenReturn(Optional.of(trade1));
         tradeService.findTradeById(1);
         verify(tradeRepository, times(1)).findById(1);
     }
 
     @Test
-    void findBidListByIdNotExistsTest() {
+    void findTradeByIdNotExistsTest() {
         when(tradeRepository.findById(anyInt())).thenReturn(Optional.empty());
         assertThrows(ElementNotFoundException.class, () -> tradeService.findTradeById(1));
     }
@@ -59,7 +59,7 @@ class TradeServiceTest {
     // FIND ALL TRADE TEST //
 
     @Test
-    void findAllBidListTest() {
+    void findAllTradeTest() {
         when(tradeRepository.findAll()).thenReturn(tradeList);
         tradeService.findAllTrade();
         verify(tradeRepository, times(1)).findAll();
@@ -68,7 +68,7 @@ class TradeServiceTest {
     // SAVE TRADE TEST //
 
     @Test
-    void saveBidListTest() {
+    void saveTradeTest() {
         when(tradeRepository.save(any(Trade.class))).thenReturn(trade1);
         tradeService.saveTrade(trade1);
         verify(tradeRepository, times(1)).save(trade1);
@@ -77,7 +77,7 @@ class TradeServiceTest {
     // DELETE TRADE TEST //
 
     @Test
-    void deleteBidListTest() {
+    void deleteTradeTest() {
         doNothing().when(tradeRepository).delete(any(Trade.class));
         tradeService.deleteTrade(trade1);
         verify(tradeRepository, times(1)).delete(trade1);

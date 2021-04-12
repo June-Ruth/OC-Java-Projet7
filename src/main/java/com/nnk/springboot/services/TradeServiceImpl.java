@@ -58,7 +58,7 @@ public class TradeServiceImpl implements TradeService {
     }
 
     /**
-     * @see Trade .
+     * @see TradeService .
      * @param trade to save.
      * @return trade.
      */
