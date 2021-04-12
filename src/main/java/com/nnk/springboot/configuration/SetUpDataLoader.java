@@ -1,7 +1,6 @@
 package com.nnk.springboot.configuration;
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.exceptions.UsernameAlreadyExistException;
 import com.nnk.springboot.services.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
