@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,13 +27,19 @@ public class UserController {
      * @see UserService
      */
     private UserService userService;
+    /**
+     * @see PasswordEncoder
+     */
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Autowired constructor.
      * @param pUserService .
      */
-    public UserController(final UserService pUserService) {
+    public UserController(final UserService pUserService,
+                          final PasswordEncoder pPasswordEncoder) {
         userService = pUserService;
+        passwordEncoder = pPasswordEncoder;
     }
 
     /**
@@ -72,6 +79,7 @@ public class UserController {
                            final Model model) {
         LOGGER.info("Try to save new user : " + user);
         if (!result.hasErrors()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             User user1 = userService.saveUser(user);
             LOGGER.info("Save user : " + user1);
             return "redirect:/user/list";
@@ -113,7 +121,7 @@ public class UserController {
             User user1 = userService.findUserById(id);
             user1.setFullname(user.getFullname());
             user1.setUsername(user.getUsername());
-            user1.setPassword(user.getPassword());
+            user1.setPassword(passwordEncoder.encode(user.getPassword()));
             user1.setRole(user.getRole());
             userService.saveUser(user1);
             LOGGER.info("Success to update user " + user1);

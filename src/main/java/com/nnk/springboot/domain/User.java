@@ -55,6 +55,8 @@ public class User {
     @NotBlank(message = FIELD_IS_MANDATORY)
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String password;
+    //TODO : voir pour contrainte password
+
     /**
      * Full name.
      */
