@@ -41,7 +41,7 @@ class TradeServiceTest {
         tradeList.add(trade2);
     }
 
-    // FIND BID LIST BY ID TEST //
+    // FIND TRADE BY ID TEST //
 
     @Test
     void findBidListByIdExistsTest() {
@@ -56,7 +56,7 @@ class TradeServiceTest {
         assertThrows(ElementNotFoundException.class, () -> tradeService.findTradeById(1));
     }
 
-    // FIND ALL BID LIST TEST //
+    // FIND ALL TRADE TEST //
 
     @Test
     void findAllBidListTest() {
@@ -65,7 +65,7 @@ class TradeServiceTest {
         verify(tradeRepository, times(1)).findAll();
     }
 
-    // SAVE BID LIST TEST //
+    // SAVE TRADE TEST //
 
     @Test
     void saveBidListTest() {
@@ -74,7 +74,7 @@ class TradeServiceTest {
         verify(tradeRepository, times(1)).save(trade1);
     }
 
-    // DELETE BID LIST TEST //
+    // DELETE TRADE TEST //
 
     @Test
     void deleteBidListTest() {
