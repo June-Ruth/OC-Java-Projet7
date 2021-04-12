@@ -2,6 +2,7 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.exceptions.ElementNotFoundException;
+import com.nnk.springboot.exceptions.UsernameAlreadyExistException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,10 +69,26 @@ class UserServiceTest {
     // SAVE USER TEST //
 
     @Test
-    void saveUserTest() {
+    void saveNewUserTest() {
         when(userRepository.save(any(User.class))).thenReturn(user1);
         userService.saveUser(user1);
         verify(userRepository, times(1)).save(user1);
+    }
+
+    @Test
+    void saveOldUserWithIdTest() {
+        user1.setId(1);
+        when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user1)).thenReturn(Optional.of(user1));
+        when(userRepository.save(any(User.class))).thenReturn(user1);
+        userService.saveUser(user1);
+        verify(userRepository, times(1)).save(user1);
+    }
+
+    @Test
+    void saveNOldUserWithoutIdTest() {
+        when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user1)).thenReturn(Optional.of(user2));
+        when(userRepository.save(any(User.class))).thenReturn(user1);
+        assertThrows(UsernameAlreadyExistException.class, () -> userService.saveUser(user1));
     }
 
     // DELETE USER TEST //
