@@ -2,6 +2,7 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.exceptions.ElementNotFoundException;
+import com.nnk.springboot.exceptions.UsernameAlreadyExistException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,9 +67,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(final User user) {
         LOGGER.info("Try to save user : " + user);
-        User result = userRepository.save(user);
-        LOGGER.info("Save user : " + result);
-        return result;
+        if(!userRepository.findByUsername(user.getUsername()).isPresent()) {
+            User result = userRepository.save(user);
+            LOGGER.info("Save user : " + result);
+            return result;
+        } else {
+            Integer id = userRepository.findByUsername(user.getUsername()).get().getId();
+            if (user.getId() != null && user.getId().equals(id)) {
+                User result = userRepository.save(user);
+                LOGGER.info("Save user : " + result);
+                return result;
+            } else {
+                throw new UsernameAlreadyExistException("username " + user.getUsername() + " is already used");
+            }
+        }
     }
 
     /**
@@ -81,5 +93,11 @@ public class UserServiceImpl implements UserService {
         LOGGER.info("Try to delete user : " + user);
         userRepository.delete(user);
         LOGGER.info("Delete user");
+    }
+
+    @Override
+    public boolean checkUserByUsername(String username) {
+        LOGGER.info("Check if user exists with username : " + username);
+        return userRepository.existsByUsername(username);
     }
 }

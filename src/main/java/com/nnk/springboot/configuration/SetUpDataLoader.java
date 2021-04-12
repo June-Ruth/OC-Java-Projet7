@@ -1,6 +1,7 @@
 package com.nnk.springboot.configuration;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.UsernameAlreadyExistException;
 import com.nnk.springboot.services.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -43,8 +44,12 @@ public class SetUpDataLoader implements ApplicationListener<ContextRefreshedEven
         if (!alreadySetup) {
             User user = new User("user", passwordEncoder.encode("password"), "User Test", "ROLE_USER");
             User admin = new User("admin", passwordEncoder.encode("password"), "Admin Test", "ROLE_ADMIN");
-            userService.saveUser(user);
-            userService.saveUser(admin);
+            if (!userService.checkUserByUsername(user.getUsername())) {
+                userService.saveUser(user);
+            }
+            if (!userService.checkUserByUsername(admin.getUsername())) {
+                userService.saveUser(admin);
+            }
             alreadySetup = true;
         }
     }

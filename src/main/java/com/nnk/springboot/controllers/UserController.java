@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.UsernameAlreadyExistException;
 import com.nnk.springboot.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,10 +80,14 @@ public class UserController {
                            final Model model) {
         LOGGER.info("Try to save new user : " + user);
         if (!result.hasErrors()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User user1 = userService.saveUser(user);
-            LOGGER.info("Save user : " + user1);
-            return "redirect:/user/list";
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            try {
+                User user1 = userService.saveUser(user);
+                LOGGER.info("Save user : " + user1);
+                return "redirect:/user/list";
+            } catch (UsernameAlreadyExistException e) {
+                LOGGER.error(e);
+            }
         }
         LOGGER.error("Can't save following user, "
                 + "must be invalid data :" + user);
@@ -123,9 +128,13 @@ public class UserController {
             user1.setUsername(user.getUsername());
             user1.setPassword(passwordEncoder.encode(user.getPassword()));
             user1.setRole(user.getRole());
-            userService.saveUser(user1);
-            LOGGER.info("Success to update user " + user1);
-            return "redirect:/user/list";
+            try {
+                userService.saveUser(user1);
+                LOGGER.info("Success to update user " + user1);
+                return "redirect:/user/list";
+            } catch (UsernameAlreadyExistException e) {
+                LOGGER.error(e);
+            }
         }
         user.setId(id);
         LOGGER.error("Can't update following user, "
