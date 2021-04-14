@@ -37,7 +37,7 @@ class UserControllerTest {
     private UserDetailsService userDetailsService;
 
     @MockBean
-    private UserService tradeService;
+    private UserService userService;
 
     private User user1;
     private User user2;
@@ -66,7 +66,7 @@ class UserControllerTest {
     @Test
     @WithMockUser
     void homeAuthenticatedTest() throws Exception {
-        when(tradeService.findAllUser()).thenReturn(userList);
+        when(userService.findAllUser()).thenReturn(userList);
         mockMvc.perform(get("/user/list"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
@@ -110,7 +110,7 @@ class UserControllerTest {
     @Test
     @WithMockUser
     void validateAuthenticatedValidDataTest() throws Exception {
-        when(tradeService.saveUser(any(User.class))).thenReturn(user4);
+        when(userService.saveUser(any(User.class))).thenReturn(user4);
         mockMvc.perform(post("/user/validate")
                 .contentType("text/html;charset=UTF-8")
                 .sessionAttr("userList", user4)
@@ -159,8 +159,8 @@ class UserControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdExistsTest() throws Exception {
-        when(tradeService.findUserById(anyInt())).thenReturn(user1);
+    void showUpdateFormAuthenticatedUserIdExistsTest() throws Exception {
+        when(userService.findUserById(anyInt())).thenReturn(user1);
         mockMvc.perform(get("/user/update/{id}", 1)
                 .sessionAttr("user", user1)
                 .param("userId", "1"))
@@ -173,8 +173,8 @@ class UserControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception {
-        when(tradeService.findUserById(anyInt())).thenThrow(ElementNotFoundException.class);
+    void showUpdateFormAuthenticatedUserIdNotExistsTest() throws Exception {
+        when(userService.findUserById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/user/update/{id}", 1)
                 .param("userId", "1"))
                 .andExpect(status().isNotFound())
@@ -196,8 +196,8 @@ class UserControllerTest {
     @Test
     @WithMockUser
     void updateUserAuthenticatedValidDataTest() throws Exception {
-        when(tradeService.findUserById(anyInt())).thenReturn(user1);
-        when(tradeService.saveUser(any(User.class))).thenReturn(user1);
+        when(userService.findUserById(anyInt())).thenReturn(user1);
+        when(userService.saveUser(any(User.class))).thenReturn(user1);
         mockMvc.perform(post("/user/update/{id}", 1)
                 .sessionAttr("user", user1)
                 .param("userId", "1")
@@ -241,8 +241,8 @@ class UserControllerTest {
     @Test
     @WithMockUser
     void deleteUserAuthenticatedBidListIdExistsTest() throws Exception {
-        when(tradeService.findUserById(anyInt())).thenReturn(user1);
-        doNothing().when(tradeService).deleteUser(any(User.class));
+        when(userService.findUserById(anyInt())).thenReturn(user1);
+        doNothing().when(userService).deleteUser(any(User.class));
         mockMvc.perform(get("/user/delete/{id}", 1)
                 .sessionAttr("user", user1)
                 .param("userId", "1"))
@@ -255,7 +255,7 @@ class UserControllerTest {
     @Test
     @WithMockUser
     void deleteUserAuthenticatedBidListIdNotExistsTest() throws Exception {
-        when(tradeService.findUserById(anyInt())).thenThrow(ElementNotFoundException.class);
+        when(userService.findUserById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/user/delete/{id}", 1)
                 .param("userId", "1"))
                 .andExpect(status().isNotFound())

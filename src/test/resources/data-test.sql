@@ -8,8 +8,8 @@ DELETE FROM test.user;
 INSERT INTO test.bid_list(bid_list_id, account, type, bid_quantity) VALUES (01, 'Account 1', 'Type 1', 10.00);
 INSERT INTO test.bid_list(bid_list_id, account, type, bid_quantity) VALUES (02, 'Account 2', 'Type 2', 20.00);
 
-INSERT INTO test.curve_point(id, curve_id, term, value) VALUES (01, 01, 'Term 1', 01);
-INSERT INTO test.curve_point(id, curve_id, term, value) VALUES (02, 02, 'Term 2', 02);
+INSERT INTO test.curve_point(id, curve_id, term, value) VALUES (01, 01, 01, 01);
+INSERT INTO test.curve_point(id, curve_id, term, value) VALUES (02, 02, 02, 02);
 
 INSERT INTO test.rating(id, moodys_rating, sand_p_rating, fitch_rating, order_number)
 VALUES (01, 'Moodys Rating 1', 'Sand P Rating 1', 'Fitch Rating 1', 01);

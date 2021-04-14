@@ -156,7 +156,7 @@ class TradeControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdExistsTest() throws Exception {
+    void showUpdateFormAuthenticatedTradeIdExistsTest() throws Exception {
         when(tradeService.findTradeById(anyInt())).thenReturn(trade1);
         mockMvc.perform(get("/trade/update/{id}", 1)
                 .sessionAttr("trade", trade1)
@@ -170,7 +170,7 @@ class TradeControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedBidListIdNotExistsTest() throws Exception {
+    void showUpdateFormAuthenticatedTradeIdNotExistsTest() throws Exception {
         when(tradeService.findTradeById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/trade/update/{id}", 1)
                 .param("tradeId", "1"))
