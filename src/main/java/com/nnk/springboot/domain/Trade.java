@@ -9,7 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+
+import java.time.LocalDateTime;
 
 import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
 import static com.nnk.springboot.constants.ErrorMessage.INVALID_NUMBER;
@@ -97,7 +98,7 @@ public class Trade {
      * Trade date.
      */
     @Column(name = "trade_date")
-    private Timestamp tradeDate;
+    private LocalDateTime tradeDate;
 
     /**
      * Security.
@@ -133,7 +134,7 @@ public class Trade {
      * Creation date.
      */
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    private LocalDateTime creationDate;
     /**
      * Revision name.
      */
@@ -144,7 +145,7 @@ public class Trade {
      * Revision date.
      */
     @Column(name = "revision_date")
-    private Timestamp revisionDate;
+    private LocalDateTime revisionDate;
     /**
      * Deal name.
      */
@@ -279,7 +280,7 @@ public class Trade {
      * @param pSellPrice .
      */
     public void setSellPrice(final Double pSellPrice) {
-        this.sellPrice = pSellPrice;
+        sellPrice = pSellPrice;
     }
 
     /**
@@ -302,7 +303,7 @@ public class Trade {
      * Getter.
      * @return trade date.
      */
-    public Timestamp getTradeDate() {
+    public LocalDateTime getTradeDate() {
         return tradeDate;
     }
 
@@ -310,7 +311,7 @@ public class Trade {
      * Setter.
      * @param pTradeDate .
      */
-    public void setTradeDate(final Timestamp pTradeDate) {
+    public void setTradeDate(final LocalDateTime pTradeDate) {
         tradeDate = pTradeDate;
     }
 
@@ -327,7 +328,7 @@ public class Trade {
      * @param pSecurity .
      */
     public void setSecurity(final String pSecurity) {
-        this.security = pSecurity;
+        security = pSecurity;
     }
 
     /**
@@ -359,7 +360,7 @@ public class Trade {
      * @param pTrader .
      */
     public void setTrader(final String pTrader) {
-        this.trader = pTrader;
+        trader = pTrader;
     }
 
     /**
@@ -398,7 +399,7 @@ public class Trade {
      * Getter.
      * @return creation date.
      */
-    public Timestamp getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -406,7 +407,7 @@ public class Trade {
      * Setter.
      * @param pCreationDate .
      */
-    public void setCreationDate(final Timestamp pCreationDate) {
+    public void setCreationDate(final LocalDateTime pCreationDate) {
         creationDate = pCreationDate;
     }
 
@@ -430,7 +431,7 @@ public class Trade {
      * Getter.
      * @return revision date.
      */
-    public Timestamp getRevisionDate() {
+    public LocalDateTime getRevisionDate() {
         return revisionDate;
     }
 
@@ -438,7 +439,7 @@ public class Trade {
      * Setter.
      * @param pRevisionDate .
      */
-    public void setRevisionDate(final Timestamp pRevisionDate) {
+    public void setRevisionDate(final LocalDateTime pRevisionDate) {
         revisionDate = pRevisionDate;
     }
 
