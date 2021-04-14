@@ -10,16 +10,30 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
     /**
-     * @see User
+     * Username.
      */
-    private User user;
+    private String username;
+    /**
+     * Password.
+     */
+    private String password;
+    /**
+     * Authorities.
+     */
+    private Collection<? extends GrantedAuthority> authorities;
 
     /**
      * Public constructor.
-     * @param pUser
+     * @param pUsername .
+     * @param pPassword .
+     * @param pAuthorities .
      */
-    public CustomUserDetails(final User pUser) {
-        user = pUser;
+    public CustomUserDetails(final String pUsername,
+                             final String pPassword,
+                             final Collection<? extends GrantedAuthority> pAuthorities) {
+        username = pUsername;
+        password = pPassword;
+        authorities = pAuthorities;
     }
 
     /**
@@ -35,9 +49,6 @@ public class CustomUserDetails implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        String role = user.getRole();
-        authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
 
@@ -47,7 +58,7 @@ public class CustomUserDetails implements UserDetails {
      */
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     /**
@@ -56,7 +67,7 @@ public class CustomUserDetails implements UserDetails {
      */
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return username;
     }
 
     /**

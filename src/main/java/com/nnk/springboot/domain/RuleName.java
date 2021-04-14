@@ -163,7 +163,7 @@ public class RuleName {
      * @param pTemplate .
      */
     public void setTemplate(final String pTemplate) {
-        template = template;
+        template = pTemplate;
     }
 
     /**
