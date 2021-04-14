@@ -49,14 +49,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login/**").permitAll()
+                .antMatchers("/login/**", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/bidList/list", true)
                 .permitAll()
                 .and()
-                .logout().permitAll()
+                .logout().logoutSuccessUrl("/home").permitAll()
                 .and()
                 .csrf().disable();
     }

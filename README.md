@@ -11,8 +11,7 @@ Web Skeleton for Poseidon Application.
 * The application works with a MySQL database on port 3306.
 * Before running, add username and password access for database in application.properties.
 * Run script schema-demo.sql before the first use to create SQL DataBase.
-* Run script data-demo.sql if you want some default values for demo.
-* For demo version, the SetUpDataLoader class create 1 user and 1 admin. Suppress the TODO part before production.
+* For **demo version**, the SetUpDataLoader create default values from data-demo.sql and add 1 user and 1 admin.
 
 ### Running Tests
 * Test works with a MySQL database on port 3306.
