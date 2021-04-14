@@ -51,7 +51,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin()
+                .defaultSuccessUrl("/bidList/list", true)
+                .permitAll()
+                .and()
+                .logout().permitAll()
                 .and()
                 .csrf().disable();
     }
