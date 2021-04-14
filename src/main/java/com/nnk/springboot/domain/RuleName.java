@@ -1,9 +1,12 @@
 package com.nnk.springboot.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
 
 import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
@@ -13,25 +16,25 @@ import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 public class RuleName {
     /**
      * Public constructor.
-     * @param name .
-     * @param description .
-     * @param json .
-     * @param template .
-     * @param sqlStr .
-     * @param sqlPart .
+     * @param pName .
+     * @param pDescription .
+     * @param pJson .
+     * @param pTemplate .
+     * @param pSqlStr .
+     * @param pSqlPart .
      */
-    public RuleName(final String name,
-                    final String description,
-                    final String json,
-                    final String template,
-                    final String sqlStr,
-                    final String sqlPart) {
-        this.name = name;
-        this.description = description;
-        this.json = json;
-        this.template = template;
-        this.sqlStr = sqlStr;
-        this.sqlPart = sqlPart;
+    public RuleName(final String pName,
+                    final String pDescription,
+                    final String pJson,
+                    final String pTemplate,
+                    final String pSqlStr,
+                    final String pSqlPart) {
+        name = pName;
+        description = pDescription;
+        json = pJson;
+        template = pTemplate;
+        sqlStr = pSqlStr;
+        sqlPart = pSqlPart;
     }
 
     /**
@@ -93,7 +96,7 @@ public class RuleName {
 
     /**
      * Setter.
-     * @param pId.
+     * @param pId .
      */
     public void setId(final Integer pId) {
         id = pId;
@@ -101,7 +104,7 @@ public class RuleName {
 
     /**
      * Getter.
-     * @return name.
+     * @return name .
      */
     public String getName() {
         return name;

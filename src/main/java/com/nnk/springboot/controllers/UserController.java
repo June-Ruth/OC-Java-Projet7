@@ -36,6 +36,7 @@ public class UserController {
     /**
      * Autowired constructor.
      * @param pUserService .
+     * @param pPasswordEncoder .
      */
     public UserController(final UserService pUserService,
                           final PasswordEncoder pPasswordEncoder) {

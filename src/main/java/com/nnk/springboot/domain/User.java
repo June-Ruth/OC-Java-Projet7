@@ -54,8 +54,9 @@ public class User {
      * Password.
      */
     @NotBlank(message = FIELD_IS_MANDATORY)
-    @Pattern(regexp="(^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,125}$)",
-            message = "Password must have at least 1 upper case, one digit and be between 8 and 125 characters long.")
+    @Pattern(regexp = "(^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,125}$)",
+            message = "Password must have at least 1 upper case,"
+                    + "one digit and be between 8 and 125 characters long.")
     private String password;
 
     /**

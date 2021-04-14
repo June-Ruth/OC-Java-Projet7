@@ -67,18 +67,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(final User user) {
         LOGGER.info("Try to save user : " + user);
-        if(!userRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (!userRepository.findByUsername(user.getUsername()).isPresent()) {
             User result = userRepository.save(user);
             LOGGER.info("Save user : " + result);
             return result;
         } else {
-            Integer id = userRepository.findByUsername(user.getUsername()).get().getId();
+            Integer id = userRepository.findByUsername(
+                    user.getUsername()).get().getId();
             if (user.getId() != null && user.getId().equals(id)) {
                 User result = userRepository.save(user);
                 LOGGER.info("Save user : " + result);
                 return result;
             } else {
-                throw new UsernameAlreadyExistException("username " + user.getUsername() + " is already used");
+                throw new UsernameAlreadyExistException("username "
+                        + user.getUsername() + " is already used");
             }
         }
     }
@@ -95,8 +97,13 @@ public class UserServiceImpl implements UserService {
         LOGGER.info("Delete user");
     }
 
+    /**
+     * @see UserService
+     * @param username .
+     * @return true if exists.
+     */
     @Override
-    public boolean checkUserByUsername(String username) {
+    public boolean checkUserByUsername(final String username) {
         LOGGER.info("Check if user exists with username : " + username);
         return userRepository.existsByUsername(username);
     }

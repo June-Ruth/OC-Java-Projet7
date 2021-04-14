@@ -7,7 +7,8 @@ public final class ErrorMessage {
     /**
      * Error message for invalid entry with too much characters.
      */
-    public static final String TOO_MUCH_CHARACTERS = "Entry must be less characters";
+    public static final String TOO_MUCH_CHARACTERS =
+            "Entry must be less characters";
     /**
      * Error message for invalid number.
      */
@@ -20,4 +21,9 @@ public final class ErrorMessage {
      * Error message when username is not found.
      */
     public static final String USERNAME_NOT_FOUND = "Username was not found";
+
+    /**
+     * Private empty constructor.
+     */
+    private ErrorMessage() { }
 }

@@ -10,10 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("app")
 public class LoginController {
-
+    /**
+     * @see UserRepository
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * login.
+     * @return login.
+     */
     @GetMapping("login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
@@ -21,6 +27,10 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * secure.
+     * @return user.
+     */
     @GetMapping("secure/article-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
@@ -29,10 +39,14 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * error.
+     * @return 403.
+     */
     @GetMapping("error")
     public ModelAndView error() {
         ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
+        String errorMessage = "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);
         mav.setViewName("403");
         return mav;

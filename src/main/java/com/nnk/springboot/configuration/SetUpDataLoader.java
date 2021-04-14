@@ -8,7 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SetUpDataLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class SetUpDataLoader
+        implements ApplicationListener<ContextRefreshedEvent> {
     /**
      * App is already set up ?
      */
@@ -39,10 +40,14 @@ public class SetUpDataLoader implements ApplicationListener<ContextRefreshedEven
      * @param event .
      */
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(final ContextRefreshedEvent event) {
         if (!alreadySetup) {
-            User user = new User("user", passwordEncoder.encode("password"), "User Test", "ROLE_USER");
-            User admin = new User("admin", passwordEncoder.encode("password"), "Admin Test", "ROLE_ADMIN");
+            User user = new User("user",
+                    passwordEncoder.encode("password"),
+                    "User Test", "ROLE_USER");
+            User admin = new User("admin",
+                    passwordEncoder.encode("password"),
+                    "Admin Test", "ROLE_ADMIN");
             if (!userService.checkUserByUsername(user.getUsername())) {
                 userService.saveUser(user);
             }

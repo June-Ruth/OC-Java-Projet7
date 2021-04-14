@@ -15,7 +15,7 @@ import static com.nnk.springboot.constants.Number.TWO;
 
 
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "curve_point")
 public class CurvePoint {
     /**
      * Public constructor.
@@ -47,7 +47,7 @@ public class CurvePoint {
      * Curve id.
      */
     @Column(name = "curve_id")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Integer curveId;
     /**
      * As of date.
@@ -58,13 +58,13 @@ public class CurvePoint {
      * Term.
      */
     @Column(name = "term")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double term;
     /**
      * Value.
      */
     @Column(name = "value")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double value;
     /**
      * Creation date.
