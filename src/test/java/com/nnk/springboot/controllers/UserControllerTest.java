@@ -50,10 +50,10 @@ class UserControllerTest {
     @BeforeEach
     void beforeEach() {
         userList = new ArrayList<>();
-        user1 = new User("username1", "password1", "fullname1", "ROLE_USER");
-        user2 = new User("username2", "password2", "fullname2", "ROLE_ADMIN");
-        user3 = new User("username3", "password3", "fullname3", "ROLE_USER");
-        user4 = new User("username4", "password4", "fullname4", "ROLE_USER");
+        user1 = new User("username1", "Password1$", "fullname1", "ROLE_USER");
+        user2 = new User("username2", "Password2$", "fullname2", "ROLE_ADMIN");
+        user3 = new User("username3", "Password3$", "fullname3", "ROLE_USER");
+        user4 = new User("username4", "Password4$", "fullname4", "ROLE_USER");
         user5 = new User(null, null, null, null);
         userList.add(user1);
         userList.add(user2);

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
@@ -53,9 +54,9 @@ public class User {
      * Password.
      */
     @NotBlank(message = FIELD_IS_MANDATORY)
-    @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
+    @Pattern(regexp="(^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,125}$)",
+            message = "Password must have at least 1 upper case, one digit and be between 8 and 125 characters long.")
     private String password;
-    //TODO : voir pour contrainte password
 
     /**
      * Full name.
