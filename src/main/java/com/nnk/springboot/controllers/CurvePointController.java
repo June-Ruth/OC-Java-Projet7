@@ -1,8 +1,6 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.services.BidListService;
 import com.nnk.springboot.services.CurvePointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -75,7 +73,8 @@ public class CurvePointController {
                            final Model model) {
         LOGGER.info("Try to save new curve point : " + curvePoint);
         if (!result.hasErrors()) {
-            CurvePoint curvePoint1 = curvePointService.saveCurvePoint(curvePoint);
+            CurvePoint curvePoint1 =
+                    curvePointService.saveCurvePoint(curvePoint);
             LOGGER.info("Save curve point : " + curvePoint1);
             return "redirect:/curvePoint/list";
         }
@@ -94,7 +93,8 @@ public class CurvePointController {
     public String showUpdateForm(@PathVariable("id") final Integer id,
                                  final Model model) {
         LOGGER.info("Show the form to update curve point with id " + id);
-        model.addAttribute("curvePoint", curvePointService.findCurvePointById(id));
+        model.addAttribute("curvePoint",
+                curvePointService.findCurvePointById(id));
         return "curvePoint/update";
     }
 

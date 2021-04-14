@@ -26,7 +26,8 @@ public class CurvePointServiceImpl implements CurvePointService {
      * Autowired constructor.
      * @param pCurvePointRepository .
      */
-    public CurvePointServiceImpl(final CurvePointRepository pCurvePointRepository) {
+    public CurvePointServiceImpl(
+            final CurvePointRepository pCurvePointRepository) {
         curvePointRepository = pCurvePointRepository;
     }
 
@@ -41,7 +42,8 @@ public class CurvePointServiceImpl implements CurvePointService {
         CurvePoint result = curvePointRepository.findById(id)
                 .orElseThrow(() -> new ElementNotFoundException(
                         "No curve point found for id : " + id));
-        LOGGER.info("Get curve point with id : " + id + "\n result : " + result);
+        LOGGER.info("Get curve point with id : "
+                + id + "\n result : " + result);
         return result;
     }
 

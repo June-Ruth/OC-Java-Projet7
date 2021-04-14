@@ -24,4 +24,9 @@ public final class Number {
      * Number 125.
      */
     public static final int ONE_HUNDRED_TWENTY_FIVE = 125;
+
+    /**
+     * Private empty constructor.
+     */
+    private Number() { }
 }

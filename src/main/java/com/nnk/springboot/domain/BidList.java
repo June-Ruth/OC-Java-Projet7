@@ -11,7 +11,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
-import static com.nnk.springboot.constants.ErrorMessage.*;
+import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
+import static com.nnk.springboot.constants.ErrorMessage.INVALID_NUMBER;
+import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 import static com.nnk.springboot.constants.Number.SIX;
 import static com.nnk.springboot.constants.Number.THIRTY;

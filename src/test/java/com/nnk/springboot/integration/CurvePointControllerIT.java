@@ -150,7 +150,7 @@ class CurvePointControllerIT {
     @WithMockUser
     void showUpdateFormAuthenticatedCurvePointIdExistsIT() throws Exception {
         mockMvc.perform(get("/curvePoint/update/{id}", 1)
-                .param("curvePointId", "1"))
+                .param("id", "1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(handler().methodName("showUpdateForm"))
@@ -161,7 +161,7 @@ class CurvePointControllerIT {
     @WithMockUser
     void showUpdateFormAuthenticatedCurvePointIdNotExistsIT() throws Exception {
         mockMvc.perform(get("/curvePoint/update/{id}", 17)
-                .param("curvePointId", "17"))
+                .param("id", "17"))
                 .andExpect(status().isNotFound())
                 .andExpect(handler().methodName("showUpdateForm"));
     }
@@ -198,7 +198,7 @@ class CurvePointControllerIT {
     void updateCurvePointAuthenticatedInvalidDataIT() throws Exception {
         mockMvc.perform(post("/curvePoint/update/{id}", 1)
                 .sessionAttr("curvePoint", curvePoint1)
-                .param("curvePointId", "1")
+                .param("id", "1")
                 .param("curveId", "123456.789")
                 .param("term", "123456.789")
                 .param("value", "123456.789"))
@@ -224,7 +224,7 @@ class CurvePointControllerIT {
     void deleteCurvePointAuthenticatedCurvePointIdExistsIT() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/{id}", 1)
                 .sessionAttr("curvePoint", curvePoint1)
-                .param("curvePointId", "1"))
+                .param("id", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(handler().methodName("deleteCurvePoint"))
                 .andExpect(redirectedUrl("/curvePoint/list"))
@@ -235,7 +235,7 @@ class CurvePointControllerIT {
     @WithMockUser
     void deleteCurvePointAuthenticatedCurvePointIdNotExistsIT() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/{id}", 17)
-                .param("curvePointId", "17"))
+                .param("id", "17"))
                 .andExpect(status().isNotFound())
                 .andExpect(handler().methodName("deleteCurvePoint"));
     }
@@ -245,7 +245,7 @@ class CurvePointControllerIT {
     void deleteCurvePointUnauthenticatedCurvePointIdExistsIT() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/{id}",1)
                 .sessionAttr("curvePoint", curvePoint1)
-                .param("curvePointId", "1"))
+                .param("curveid", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }

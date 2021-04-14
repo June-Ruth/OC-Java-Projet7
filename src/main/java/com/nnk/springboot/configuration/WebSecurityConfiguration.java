@@ -24,7 +24,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @param pUserDetailsService .
      */
     public WebSecurityConfiguration(
-            @Qualifier("userDetailsServiceImpl") final UserDetailsService pUserDetailsService) {
+            @Qualifier("userDetailsServiceImpl")
+            final UserDetailsService pUserDetailsService) {
         userDetailsService = pUserDetailsService;
     }
 
@@ -46,7 +47,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      * @throws Exception .
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
