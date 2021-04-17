@@ -9,9 +9,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-import static com.nnk.springboot.constants.ErrorMessage.*;
+import static com.nnk.springboot.constants.ErrorMessage.FIELD_IS_MANDATORY;
+import static com.nnk.springboot.constants.ErrorMessage.INVALID_NUMBER;
+import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 import static com.nnk.springboot.constants.Number.SIX;
 import static com.nnk.springboot.constants.Number.THIRTY;
@@ -94,7 +96,7 @@ public class BidList {
      * Bid list date.
      */
     @Column(name = "bid_list_date")
-    private Timestamp bidListDate;
+    private LocalDateTime bidListDate;
     /**
      * Commentary.
      */
@@ -135,7 +137,7 @@ public class BidList {
      * Creation date.
      */
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    private LocalDateTime creationDate;
     /**
      * Revision name.
      */
@@ -146,7 +148,7 @@ public class BidList {
      * Revision date.
      */
     @Column(name = "revision_date")
-    private Timestamp revisionDate;
+    private LocalDateTime revisionDate;
     /**
      * Deal name.
      */
@@ -249,7 +251,7 @@ public class BidList {
      * @param pAskQuantity .
      */
     public void setAskQuantity(final Double pAskQuantity) {
-        this.askQuantity = pAskQuantity;
+        askQuantity = pAskQuantity;
     }
 
     /**
@@ -304,7 +306,7 @@ public class BidList {
      * Get bid list date.
      * @return bid list date.
      */
-    public Timestamp getBidListDate() {
+    public LocalDateTime getBidListDate() {
         return bidListDate;
     }
 
@@ -312,7 +314,7 @@ public class BidList {
      * Set bid list date.
      * @param pBidListDate
      */
-    public void setBidListDate(final Timestamp pBidListDate) {
+    public void setBidListDate(final LocalDateTime pBidListDate) {
         bidListDate = pBidListDate;
     }
 
@@ -416,7 +418,7 @@ public class BidList {
      * Get creation date.
      * @return creation date.
      */
-    public Timestamp getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -424,7 +426,7 @@ public class BidList {
      * Set creation date.
      * @param pCreationDate .
      */
-    public void setCreationDate(final Timestamp pCreationDate) {
+    public void setCreationDate(final LocalDateTime pCreationDate) {
         creationDate = pCreationDate;
     }
 
@@ -448,7 +450,7 @@ public class BidList {
      * Get revision date.
      * @return revision date.
      */
-    public Timestamp getRevisionDate() {
+    public LocalDateTime getRevisionDate() {
         return revisionDate;
     }
 
@@ -456,7 +458,7 @@ public class BidList {
      * Set revision date.
      * @param pRevisionDate .
      */
-    public void setRevisionDate(final Timestamp pRevisionDate) {
+    public void setRevisionDate(final LocalDateTime pRevisionDate) {
         revisionDate = pRevisionDate;
     }
 

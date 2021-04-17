@@ -1,10 +1,12 @@
 package com.nnk.springboot.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
 
 import static com.nnk.springboot.constants.ErrorMessage.TOO_MUCH_CHARACTERS;
 import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
@@ -14,19 +16,19 @@ import static com.nnk.springboot.constants.Number.ONE_HUNDRED_TWENTY_FIVE;
 public class Rating {
     /**
      * Public constructor.
-     * @param moodysRating .
-     * @param sandPRating .
-     * @param fitchRating .
-     * @param orderNumber .
+     * @param pMoodysRating .
+     * @param pSandPRating .
+     * @param pFitchRating .
+     * @param pOrderNumber .
      */
-    public Rating(final String moodysRating,
-                  final String sandPRating,
-                  final String fitchRating,
-                  final Integer orderNumber) {
-        this.moodysRating = moodysRating;
-        this.sandPRating = sandPRating;
-        this.fitchRating = fitchRating;
-        this.orderNumber = orderNumber;
+    public Rating(final String pMoodysRating,
+                  final String pSandPRating,
+                  final String pFitchRating,
+                  final Integer pOrderNumber) {
+        moodysRating = pMoodysRating;
+        sandPRating = pSandPRating;
+        fitchRating = pFitchRating;
+        orderNumber = pOrderNumber;
     }
 
     /**
@@ -59,7 +61,9 @@ public class Rating {
     @Column(name = "fitch_rating")
     @Size(max = ONE_HUNDRED_TWENTY_FIVE, message = TOO_MUCH_CHARACTERS)
     private String fitchRating;
-
+    /**
+     * Order number.
+     */
     @Column(name = "order_number")
     private Integer orderNumber;
 

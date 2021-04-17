@@ -6,8 +6,10 @@ import com.nnk.springboot.services.RatingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +31,10 @@ class RatingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    @Qualifier("userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
 
     @MockBean
     private RatingService ratingService;
@@ -153,7 +159,7 @@ class RatingControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedCurvePointIdExistsTest() throws Exception {
+    void showUpdateFormAuthenticatedRatingIdExistsTest() throws Exception {
         when(ratingService.findRatingById(anyInt())).thenReturn(rating4);
         mockMvc.perform(get("/rating/update/{id}", 4)
                 .param("ratingId", "4"))
@@ -166,10 +172,10 @@ class RatingControllerTest {
 
     @Test
     @WithMockUser
-    void showUpdateFormAuthenticatedCurvePointIdNotExistsTest() throws Exception {
+    void showUpdateFormAuthenticatedRatingIdNotExistsTest() throws Exception {
         when(ratingService.findRatingById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/rating/update/{id}", 1)
-                .param("curvePointId", "1"))
+                .param("ratingId", "1"))
                 .andExpect(status().isNotFound())
                 .andExpect(handler().methodName("showUpdateForm"));
     }
@@ -231,7 +237,7 @@ class RatingControllerTest {
 
     @Test
     @WithMockUser
-    void deleteRatingAuthenticatedBidListIdExistsTest() throws Exception {
+    void deleteRatingAuthenticatedRatingIdExistsTest() throws Exception {
         when(ratingService.findRatingById(anyInt())).thenReturn(rating1);
         doNothing().when(ratingService).deleteRating(any(Rating.class));
         mockMvc.perform(get("/rating/delete/{id}", 1)
@@ -245,7 +251,7 @@ class RatingControllerTest {
 
     @Test
     @WithMockUser
-    void deleteRatingAuthenticatedBidListIdNotExistsTest() throws Exception {
+    void deleteRatingAuthenticatedRatingIdNotExistsTest() throws Exception {
         when(ratingService.findRatingById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/rating/delete/{id}", 1)
                 .param("ratingId", "1"))
@@ -255,7 +261,7 @@ class RatingControllerTest {
 
     @Test
     @WithAnonymousUser
-    void deleteRatingUnauthenticatedBidListIdExistsTest() throws Exception {
+    void deleteRatingUnauthenticatedRatingIdExistsTest() throws Exception {
         mockMvc.perform(get("/rating/delete/{id}",1)
                 .sessionAttr("rating", rating1)
                 .param("ratingId", "1"))

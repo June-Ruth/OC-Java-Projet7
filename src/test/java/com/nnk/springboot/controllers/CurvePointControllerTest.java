@@ -6,8 +6,10 @@ import com.nnk.springboot.services.CurvePointService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +31,10 @@ class CurvePointControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    @Qualifier("userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
 
     @MockBean
     private CurvePointService curvePointService;
@@ -227,7 +233,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithMockUser
-    void deleteCurvePointAuthenticatedBidListIdExistsTest() throws Exception {
+    void deleteCurvePointAuthenticatedCurvePointIdExistsTest() throws Exception {
         when(curvePointService.findCurvePointById(anyInt())).thenReturn(curvePoint1);
         doNothing().when(curvePointService).deleteCurvePoint(any(CurvePoint.class));
         mockMvc.perform(get("/curvePoint/delete/{id}", 1)
@@ -241,7 +247,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithMockUser
-    void deleteCurvePointAuthenticatedBidListIdNotExistsTest() throws Exception {
+    void deleteCurvePointAuthenticatedCurvePointIdNotExistsTest() throws Exception {
         when(curvePointService.findCurvePointById(anyInt())).thenThrow(ElementNotFoundException.class);
         mockMvc.perform(get("/curvePoint/delete/{id}", 1)
                 .param("curvePointId", "1"))
@@ -251,7 +257,7 @@ class CurvePointControllerTest {
 
     @Test
     @WithAnonymousUser
-    void deleteCurvePointUnauthenticatedBidListIdExistsTest() throws Exception {
+    void deleteCurvePointUnauthenticatedCurvePointIdExistsTest() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/{id}",1)
                 .sessionAttr("curvePoint", curvePoint1)
                 .param("curvePointId", "1"))

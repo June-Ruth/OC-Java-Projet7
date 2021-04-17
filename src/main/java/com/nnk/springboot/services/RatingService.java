@@ -14,7 +14,7 @@ public interface RatingService {
     Rating findRatingById(Integer id);
 
     /**
-     * Find all Rating
+     * Find all Rating.
      * @return a list with all rating.
      * @see Rating
      */

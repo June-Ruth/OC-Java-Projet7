@@ -7,7 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
-import java.sql.Timestamp;
+
+import java.time.LocalDateTime;
 
 import static com.nnk.springboot.constants.ErrorMessage.INVALID_NUMBER;
 import static com.nnk.springboot.constants.Number.SIX;
@@ -15,7 +16,7 @@ import static com.nnk.springboot.constants.Number.TWO;
 
 
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "curve_point")
 public class CurvePoint {
     /**
      * Public constructor.
@@ -47,30 +48,30 @@ public class CurvePoint {
      * Curve id.
      */
     @Column(name = "curve_id")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Integer curveId;
     /**
      * As of date.
      */
     @Column(name = "as_of_date")
-    private Timestamp asOfDate;
+    private LocalDateTime asOfDate;
     /**
      * Term.
      */
     @Column(name = "term")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double term;
     /**
      * Value.
      */
     @Column(name = "value")
-    @Digits(integer = SIX , fraction = TWO, message = INVALID_NUMBER)
+    @Digits(integer = SIX, fraction = TWO, message = INVALID_NUMBER)
     private Double value;
     /**
      * Creation date.
      */
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    private LocalDateTime creationDate;
 
     /**
      * Getter.
@@ -108,7 +109,7 @@ public class CurvePoint {
      * Getter.
      * @return as of date.
      */
-    public Timestamp getAsOfDate() {
+    public LocalDateTime getAsOfDate() {
         return asOfDate;
     }
 
@@ -116,7 +117,7 @@ public class CurvePoint {
      * Setter.
      * @param pAsOfDate .
      */
-    public void setAsOfDate(final Timestamp pAsOfDate) {
+    public void setAsOfDate(final LocalDateTime pAsOfDate) {
         asOfDate = pAsOfDate;
     }
 
@@ -156,7 +157,7 @@ public class CurvePoint {
      * Getter.
      * @return creation date.
      */
-    public Timestamp getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -164,7 +165,7 @@ public class CurvePoint {
      * Setter.
      * @param pCreationDate .
      */
-    public void setCreationDate(final Timestamp pCreationDate) {
+    public void setCreationDate(final LocalDateTime pCreationDate) {
         creationDate = pCreationDate;
     }
 }
